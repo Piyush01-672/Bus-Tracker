@@ -55,11 +55,12 @@ Since the project has separate Backend and Frontend folders, you need **two term
 * Node.js (v16 or higher)
 * npm (Node Package Manager)
 
-### Step 1: Clone the Repository
+
 ```bash
+### Step1: clone the repo
 git clone [https://github.com/Piyush01-672/Bus-Tracker.git](https://github.com/Piyush01-672/Bus-Tracker.git)
 
-### Step 2: Clone the Repository
+### Step 2: Setup Backend
 ```bash
 cd BusTracker
 # Install backend dependencies
