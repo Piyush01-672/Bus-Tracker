@@ -11,12 +11,12 @@ const server = http.createServer(app);
 // Socket.io Setup
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Tera React App ka URL
+    origin: "http://localhost:5173", 
     methods: ["GET", "POST"]
   }
 });
 
-// Mock Database (Buses ka data)
+
 const buses = [
   { id: 'bus1', route: 'Hostel-Campus', number: 'PB-12-X-1234', driver: 'Ramesh Kumar' },
   { id: 'bus2', route: 'City-Market', number: 'PB-65-A-9999', driver: 'Suresh Singh' }

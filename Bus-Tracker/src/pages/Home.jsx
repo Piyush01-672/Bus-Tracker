@@ -5,41 +5,42 @@ function Home() {
   const [route, setRoute] = useState('Hostel-Campus');
   const navigate = useNavigate();
 
+  // Nayi Function: Jo naye tab mein kholegi
+  const openDriverMode = () => {
+    window.open('/driver', '_blank'); // '_blank' ka matlab New Tab
+  };
+
   return (
-    <div className="container">
+    <div className="home-container">
       
-      {/* Background Blobs for Visual Effect */}
-      <div style={{
-        position:'absolute', top:'10%', left:'10%', width:'300px', height:'300px',
-        background:'rgba(37, 99, 235, 0.2)', borderRadius:'50%', filter:'blur(80px)', zIndex:-1
-      }}></div>
+      <div className="blob blob-1"></div>
+      <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
 
-      <div className="card">
-        <span style={{
-          background:'rgba(96, 165, 250, 0.2)', color:'#60a5fa', 
-          padding:'4px 10px', borderRadius:'20px', fontSize:'12px', fontWeight:'bold'
-        }}>
-          IIT ROPAR TRANSIT
-        </span>
-        
-        <h1 className="title">NaviBus</h1>
-        <p style={{color:'#ccc', marginBottom:'30px'}}>Real-time shuttle tracking system.</p>
+      <div className="glass-card animate-fade-in">
+        <div className="badge">✨ IIT ROPAR TRANSIT</div>
+        <h1 className="hero-title">Navi<span className="highlight">Bus</span></h1>
+        <p className="subtitle">Next-Gen Real-Time Shuttle Tracking</p>
 
-        <div style={{textAlign:'left'}}>
-          <label style={{fontSize:'14px', color:'#aaa', marginLeft:'5px'}}>Select Route</label>
-          <select value={route} onChange={(e) => setRoute(e.target.value)}>
-            <option value="Hostel-Campus">Hostel ⇄ Admin Block</option>
-            <option value="City-Market">City ⇄ Main Market</option>
-          </select>
+        <div className="input-group">
+          <label>SELECT ROUTE</label>
+          <div className="select-wrapper">
+            <select value={route} onChange={(e) => setRoute(e.target.value)}>
+              <option value="Hostel-Campus">🏫 Hostel ⇄ Admin Block</option>
+              <option value="City-Market">🏙️ City ⇄ Main Market</option>
+            </select>
+            <span className="custom-arrow">▼</span>
+          </div>
         </div>
 
-        <button onClick={() => navigate(`/buses?route=${route}`)} className="btn-primary">
+        <button onClick={() => navigate(`/buses?route=${route}`)} className="btn-primary glow-effect">
           Find Buses 🔍
         </button>
       </div>
 
-      <button onClick={() => navigate('/driver')} className="btn-secondary">
-        Launch Driver Simulator 👨‍✈️
+      {/* YAHAN CHANGE KIYA HAI */}
+      <button onClick={openDriverMode} className="btn-secondary">
+        👨‍✈️ Launch Driver Console (New Tab)
       </button>
 
     </div>

@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 
 function RecenterMap({ lat, lng }) {
   const map = useMap();
-  useEffect(() => map.setView([lat, lng]), [lat, lng]);
+  useEffect(() => { map.setView([lat, lng]); }, [lat, lng]);
   return null;
 }
 
@@ -26,25 +26,44 @@ function LiveMap() {
   }, [busId]);
 
   return (
-    <div style={{height:'100vh', width:'100%', position:'relative'}}>
+    // FIX: 'fixed' position taaki ye Home page ke styles se affect na ho
+    <div style={{ 
+      position: 'fixed', 
+      top: 0, 
+      left: 0, 
+      width: '100vw', 
+      height: '100vh', 
+      zIndex: 9999, // Sabse upar
+      background: '#fff' 
+    }}>
       
-      {/* Floating Info Box */}
-      <div style={{
-        position:'absolute', top: 20, right: 20, zIndex: 999,
-        background: 'rgba(255,255,255,0.9)', padding: '15px', borderRadius: '12px',
-        boxShadow: '0 4px 15px rgba(0,0,0,0.2)', color: '#333', minWidth: '200px'
+      {/* Top Left Controls */}
+      <div style={{ 
+        position: 'absolute', top: 20, left: 20, zIndex: 10000, 
+        display: 'flex', gap: '10px', alignItems: 'flex-start' 
       }}>
-        <h3 style={{margin:0, color:'#2563eb'}}>Live Tracking</h3>
-        <p style={{margin:'5px 0 0 0', fontSize:'14px'}}>Driver: <b>{info.driver}</b></p>
-        <p style={{margin:0, fontSize:'14px'}}>Next Stop: <b style={{color:'#d97706'}}>{info.nextStop}</b></p>
+        
+        <button onClick={() => navigate(-1)} style={{
+          background: '#000', color: 'white', padding: '10px 20px', 
+          border: '1px solid #444', borderRadius: '8px', cursor: 'pointer', 
+          fontWeight: 'bold', boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
+        }}>
+          ⬅ Back
+        </button>
+
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.9)', padding: '10px 20px', 
+          borderRadius: '8px', border: '1px solid #ccc',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.2)', minWidth: '150px'
+        }}>
+          <div style={{ fontSize: '10px', color: '#666', textTransform: 'uppercase' }}>NEXT STOP</div>
+          <div style={{ fontWeight: 'bold', color: '#d97706', fontSize: '14px' }}>{info.nextStop}</div>
+          <div style={{ fontSize: '12px', color: '#2563eb', marginTop: '2px' }}>Driver: {info.driver}</div>
+        </div>
+
       </div>
 
-      <button onClick={() => navigate(-1)} style={{
-        position:'absolute', top: 20, left: 20, zIndex: 999,
-        padding:'10px 20px', background:'#333', color:'white', border:'none', borderRadius:'8px', cursor:'pointer'
-      }}>⬅ Back</button>
-
-      <MapContainer center={[location.lat, location.lng]} zoom={16} style={{ height: '100%', width: '100%' }}>
+      <MapContainer center={[location.lat, location.lng]} zoom={16} style={{ height: "100%", width: "100%" }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={[location.lat, location.lng]}>
           <Popup>Bus is Here!</Popup>
